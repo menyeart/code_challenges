@@ -45,4 +45,24 @@ describe "ParkingLot" do
 
     expect(parking_lot.lots).to eq(["Lexus", "Toyota", "Ford", "Honda", "Chevy"])
   end
+
+  it "can remove a car" do
+    parking_lot = ParkingLot.new(5)
+    parking_lot.park("Lexus")
+    parking_lot.park("Toyota")
+    parking_lot.park("Ford")
+    parking_lot.park("Honda")
+    parking_lot.park("Chevy")
+
+    expect(parking_lot.lots.include?("Toyota")).to eq(true)
+
+    parking_lot.remove_car("Toyota")
+    expect(parking_lot.lots.include?("Toyota")).to eq(false)
+  end
+
+  it "can count the number of spots in the lot" do
+    parking_lot = ParkingLot.new(5)
+    
+    expect(parking_lot.size).to eq(5)
+  end
 end
