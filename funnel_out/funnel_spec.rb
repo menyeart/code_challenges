@@ -19,11 +19,11 @@ RSpec.describe "Funnel" do
     end
     
 
-    it "can create strings out of 1 layer funnels" do
+    xit "can create strings out of 1 layer funnels" do
       expect(@funnel.build_string([["d","a","c"],["b","e"],["f"]])).to eq("fbadec")
     end
 
-    xit "can create strings out of 1 layer funnels" do
+    it "can create strings out of 1 layer funnels" do
       expect(@funnel.build_string([["a","e","c","f"],["d","i","h"],["j","g"],["b"]])).to eq("bghcfiejda")
 end
   
