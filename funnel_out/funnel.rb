@@ -63,28 +63,46 @@ class Funnel
   # end
 
   def build_string(input)
-    return @final_string if input.count ==  1 && arra[0] == ["nil"]
+    return @final_string if input.count ==  1 && input[0] == ["nil"]
+    
+    # p input
+    # p @final_string
 
     @final_string.concat(input.last.pop())
     input[-1] = ["nil"]
 
     min_index = 0
-
-    input.reverse.each_with_index do |array, index|
+    binding.pry
+    input.reverse[0..2].each_with_index do |array, index|
+      # Find the level above the array you're missing one for
+      
         choices_array = input.reverse[index + 1]
-     
-        choices = choices_array.map.with_index { |num, index2| num if index2.between?(min_index, min_index + 1) && num != "nil"}.compact
+        break if choices_array.all? { |letter| letter == "nil"} == true
 
-        if choices == []
-          input.slice!(0)
-          break
+      # Find only the letters that are possible to drop down in that array
+
+ 
+        # binding.pry
+        if choices_array.map.with_index { |num, index2| num if index2.between?(min_index, min_index + 1) && num != "nil"}.compact == []
+          choices = choices_array.map.with_index { |num, index2| num if index2.between?(min_index - 2, min_index + 1) && num != "nil"}.compact
+        else
+          choices = choices_array.map.with_index { |num, index2| num if index2.between?(min_index, min_index + 1) && num != "nil"}.compact
         end
+          
+
+      # Take the minium values letter from the array
 
         arr_min = choices.min
 
+      # Save the index position of this letter so we can replace it with nil later
         min_index = choices_array.find_index(arr_min)
-        input[index - 2][min_index] = "nil"
-        input[index - 1] = input[index - 1].join.gsub!("nil", arr_min).chars
+
+      # Replace it with nil  
+        input[(index + 2) * -1][min_index] = "nil"
+
+      # Move the letter down(make sure code works for every level, not just first)
+        input[(index + 1) * -1] = input[(index + 1) * -1].join.gsub("nil", arr_min).chars
+
     end
     build_string(input)
   end
