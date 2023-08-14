@@ -6,19 +6,19 @@ RSpec.describe "Funnel" do
       @funnel = Funnel.new
     end
 
-    xit "exists" do
+    it "exists" do
       expect(@funnel).to be_an_instance_of(Funnel)
     end
 
-    xit "can create strings out of 1 layer funnels" do
+    it "can create strings out of 1 layer funnels" do
       expect(@funnel.build_string([["q"]])).to eq("q")
     end
 
-    xit "can create strings out of 1 layer funnels" do
+    it "can create strings out of 1 layer funnels" do
       expect(@funnel.build_string([["b","c"],["a"]])).to eq("abc")
     end
     
-    xit "can create strings out of 1 layer funnels" do
+    it "can create strings out of 1 layer funnels" do
       expect(@funnel.build_string([["d","a","c"],["b","e"],["f"]])).to eq("fbadec")
     end
 
