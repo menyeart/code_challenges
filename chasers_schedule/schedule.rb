@@ -6,14 +6,14 @@ class Schedule
 
   def longest_distance
     course = Array.new(@duration) {[@speed, false]}
-    sprint_pos = -1
-    sprint_rate = 2
     distances = []
 
     course.reverse.map!.with_index do |position, index|
       position[1] = true if index.even? == true
+
       times_sprinted = 0
       sum = 0
+
       course.each do |position|
         position[1] == true ? sum += (position[0] - times_sprinted) * 2 : sum += position[0] - times_sprinted
         times_sprinted += 1 if position[1] == true
