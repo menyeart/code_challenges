@@ -12,4 +12,16 @@ class Activity
   def total_cost 
     @participants.values.sum
   end
+
+  def split
+    total_cost / count_participants
+  end
+
+  def count_participants
+    @participants.count
+  end
+
+  def owed
+    @participants.map { |k,v| [k, split - v]}.to_h
+  end
 end
